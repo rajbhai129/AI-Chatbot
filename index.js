@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import axios from "axios";
 import dotenv from "dotenv";
 
@@ -10,12 +9,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware for parsing JSON bodies
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Fetch API key from environment variables
 const apiKey = process.env.API_KEY;
 const baseURL = "https://api.aimlapi.com/v1";
 
+// Root route for testing
+app.get("/", (req, res) => {
+  res.send("Welcome to the AI Chatbot!");
+});
+
+// POST /chat route
 app.post("/chat", async (req, res) => {
   try {
     const { systemContent, userContent } = req.body;
@@ -44,11 +49,12 @@ app.post("/chat", async (req, res) => {
   } catch (error) {
     console.error("Error:", error.response?.data || error.message);
     res.status(500).send({
-      error: "Failed to fetch response from AI/ML API",
+      error: error.response?.data || "Failed to fetch response from AI/ML API",
     });
   }
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
