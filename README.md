@@ -24,80 +24,48 @@ This project is a conversational chatbot powered by the AI/ML API. It accepts us
 
 ## **Setup Instructions**
 
-### **1. Clone the Repository**
-```bash
-git clone https://github.com/your-username/ai-chatbot.git
-cd ai-chatbot
+1. Clone the Repository
+    ```bash
+    git clone https://github.com/rajbhai129/AI-Chatbot.git
+    cd AI-Chatbot
+    ```
+
 2. Install Dependencies
-bash
-Copy code
-npm install
+    ```bash
+    npm install
+    ```
+
 3. Create .env File
-Add your API key to a .env file in the root directory:
+    Add your API key to a .env file in the root directory:
+    ```env
+    API_KEY=your_api_key_here
+    ```
 
-env
-Copy code
-API_KEY=your-api-key-here
-4. Start the Server
-bash
-Copy code
-npm start
-5. Test the Chatbot Locally
-You can test the chatbot by making POST requests to the /chat endpoint using tools like Postman or curl. Example payload:
+4. Push Your Code to GitHub
+    Upload your project repository to GitHub.
 
-json
-Copy code
-{
-  "systemContent": "You are a coding assistant.",
-  "userContent": "Generate a Fibonacci function in C++."
-}
-Deployment on Vercel
-1. Push Your Code to GitHub
-Upload your project repository to GitHub.
+5. Link GitHub Repository with Vercel
+    - Go to Vercel and log in.
+    - Click Import Project and select Git Repository.
+    - Follow the prompts to link your GitHub repository.
 
-2. Link GitHub Repository with Vercel
-Go to Vercel and log in.
-Click Import Project and select Git Repository.
-Follow the prompts to link your GitHub repository.
-3. Configure Environment Variables
-In your Vercel dashboard, navigate to Settings > Environment Variables.
-Add the API_KEY environment variable with the same value as your .env file.
-4. Deploy
-Click on Deploy in Vercel. Your chatbot will be live once the build is complete.
+6. Configure Environment Variables
+    - In your Vercel dashboard, navigate to Settings > Environment Variables.
+    - Add the `API_KEY` environment variable with the same value as your .env file.
 
-Sample Endpoints
-POST /chat
+7. Deploy
+    - Click on Deploy in Vercel. Your chatbot will be live once the build is complete.
+
+---
+
+## **Sample Endpoints**
+
+### POST /chat
 Generate AI responses based on user and system prompts.
 
-Request Example
-json
-Copy code
+**Request Example**
+```json
 {
   "systemContent": "You are a helpful assistant.",
   "userContent": "What is the capital of France?"
 }
-Response Example
-json
-Copy code
-{
-  "result": "The capital of France is Paris."
-}
-Project Structure
-plaintext
-Copy code
-.
-├── index.js          # Main server file
-├── package.json      # Dependencies and scripts
-├── .env              # API key (not included in version control)
-├── .gitignore        # Ensures sensitive files are not pushed to Git
-└── README.md         # Project documentation
-Protecting Your API Key
-Use the dotenv package to store your API key in a .env file.
-Add .env to your .gitignore to prevent it from being uploaded to version control.
-Use environment variables (e.g., via Vercel) in production to keep the API key secure.
-Contributing
-Contributions are welcome! Please create a pull request with your changes and ensure it follows the project's structure.
-
-License
-This project is licensed under the MIT License.
-
