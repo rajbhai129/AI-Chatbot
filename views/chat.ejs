@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/main.css">
+  <style>
+    pre {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      display: inline-block;
+      margin-top: 5px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function copyToClipboard(codeBlockId) {
+      const codeBlock = document.getElementById(codeBlockId);
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        alert("Code copied to clipboard!");
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center">Chat Results</h1>
+    <h3>System Prompt:</h3>
+<p><strong><%= systemPrompt %></strong></p>
+<h3>User Prompt:</h3>
+<p><%= userPrompt %></p>
+<h3>AI Response:</h3>
+<div class="response-container">
+  <% if (aiResponse.includes("```")) { %>
+    <!-- If the response contains code -->
+    <% const parts = aiResponse.split(/```/); %>
+    <% parts.forEach((part, index) => { %>
+      <% if (index % 2 === 0) { %>
+        <div class="response"><%= part %></div> <!-- Normal text -->
+      <% } else { %>
+        <div class="code">
+          <pre id="code-<%= index %>"><%= part.trim() %></pre>
+          <button class="copy-btn" onclick="copyToClipboard('code-<%= index %>')">Copy Code</button>
+        </div>
+      <% } %>
+    <% }) %>
+  <% } else { %>
+    <div class="response"><%= aiResponse %></div>
+  <% } %>
+</div>
+<a href="/" class="btn btn-secondary mt-3">Try Again</a>
+</div>
+</body>
+</html>
